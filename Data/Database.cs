@@ -20,6 +20,7 @@ namespace MappingTheMBTA.Data
     {
         public static void Capture()
         {
+            Console.WriteLine($"{DateTime.Now} | *** SAVING DATASETS TO DB ***");
             int effective = DateTime.Now.ConvertToEffective();
 
             using (var db = new DatasetContext())
@@ -40,6 +41,7 @@ namespace MappingTheMBTA.Data
         {
             using (var db = new DatasetContext())
             {
+                Console.WriteLine($"{DateTime.Now} | RET effective: {effective}");
                 // if the date exists, return it
                 // otherwise, return empty set
                 var single = db.Datasets.SingleOrDefault(x => x.EffectiveDate == effective);
