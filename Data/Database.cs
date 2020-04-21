@@ -20,9 +20,7 @@ namespace MappingTheMBTA.Data
     {
         public static void Capture()
         {
-            Console.WriteLine($"{DateTime.Now} | ***********************************");
-            Console.WriteLine($"{DateTime.Now} | *      SAVING DATASETS TO DB      *");
-            Console.WriteLine($"{DateTime.Now} | ***********************************");
+            Console.WriteLine($"{DateTime.Now} | ***** SAVING DATASETS TO DB  *****");
             int effective = DateTime.Now.ConvertToEffective();
 
             using (var db = new DatasetContext())
