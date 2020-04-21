@@ -343,3 +343,5 @@ healthchecksdb
 /Models/APIKey.cs
 /datasets.db
 /Migrations
+*.db-wal
+*.db-shm

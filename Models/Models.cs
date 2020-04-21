@@ -35,7 +35,6 @@ namespace MappingTheMBTA.Models
     {
         [Key]
         public int Id { get; set; }
-
         public string PlaceID { get; set; } // front end format (i.e "place-<station code>")
 
         public long Arrival { get; set; } // time in unix, scheduled time then arrived time
