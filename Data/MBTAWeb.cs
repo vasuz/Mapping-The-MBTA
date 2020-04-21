@@ -14,7 +14,7 @@ namespace MappingTheMBTA.Data
             string baseUrl = "https://api-v3.mbta.com/";
             string target = baseUrl + endpoint.ToString().ToLower() + options;
 
-            Console.WriteLine($"{DateTime.Now} | GET {target}");
+            Console.WriteLine($"{DateTime.Now} | WEB | GET {target}");
             target += $"&api_key={APIKey.Key}"; // add the api key to the request after logging
 
             string result = "";

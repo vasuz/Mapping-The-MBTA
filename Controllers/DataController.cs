@@ -12,19 +12,19 @@ namespace MappingTheMBTA.Controllers
     {
         [HttpGet("data")]
         // takes in unix day
-        public Dataset GetActual(int effective)
+        public Dataset GetActual(int date)
         {
-            Console.WriteLine($"{DateTime.Now} | REQ ./api/actual");
-            if (effective == DateTime.Now.ConvertToEffective())
-                return Predicted.Include();
+            Console.WriteLine($"{DateTime.Now} | REQ | GET /api/data?date={date}");
+            if (date == DateTime.Now.ConvertToEffective())
+                return Sources.Today;
             else
-                return Database.Retrieve(effective);
+                return Database.Retrieve(date);
         }
 
         [HttpGet("dates")]
         public List<int> GetDates()
         {
-            Console.WriteLine($"{DateTime.Now} | REQ ./api/dates");
+            Console.WriteLine($"{DateTime.Now} | REQ | GET /api/dates");
             return Database.GetDates();
         }
     }

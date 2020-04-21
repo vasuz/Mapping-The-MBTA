@@ -10,6 +10,9 @@ namespace MappingTheMBTA.Models
     public class Dataset
     {
         [Key]
+        [System.Text.Json.Serialization.JsonIgnore]
+        public int Id { get; set; }
+
         public int EffectiveDate { get; set; } // in unix days
         public List<Trip> Trips { get; set; }
 
@@ -19,6 +22,7 @@ namespace MappingTheMBTA.Models
     public class Trip
     {
         [Key]
+        [System.Text.Json.Serialization.JsonIgnore]
         public int Id { get; set; }
 
         public string TripID { get; set; }
@@ -36,7 +40,9 @@ namespace MappingTheMBTA.Models
     public class Stop
     {
         [Key]
+        [System.Text.Json.Serialization.JsonIgnore]
         public int Id { get; set; }
+
         public string PlaceID { get; set; } // front end format (i.e "place-<station code>")
 
         public long Arrival { get; set; } // time in unix, scheduled time then arrived time

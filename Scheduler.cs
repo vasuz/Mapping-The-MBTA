@@ -1,7 +1,6 @@
 ﻿using FluentScheduler;
 using MappingTheMBTA.Models;
 using MappingTheMBTA.Data;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace MappingTheMBTA
 {
@@ -11,8 +10,12 @@ namespace MappingTheMBTA
         {
             // Populate the routes model, wait for it
             Route.Populate().Wait();
-            // Populate the schedule for the first time, wait for it
-            Sources.Scheduled.Update().Wait();
+
+            // Populate the current dataset, wait for it
+            Sources.Populate().Wait();
+
+            // Run the schedule updater every day at 4AM
+            Schedule(async () => await Sources.Populate()).ToRunEvery(1).Days().At(4, 00);
 
             // Run the prediction updater now & every 30 seconds
             Schedule(async () => await Predicted.Update()).ToRunNow().AndEvery(30).Seconds();
@@ -20,18 +23,8 @@ namespace MappingTheMBTA
             // Run the data updater now & every 3 seconds
             Schedule(async () => await Sources.Actual.Update()).ToRunNow().AndEvery(3).Seconds();
 
-            // Run the schedule updater every day at 4AM
-            Schedule<FillJob>().ToRunEvery(1).Days().At(4, 00);
-        }
-
-        public class FillJob : IJob
-        {
-            // fill the schedule and save it to the database
-            public async void Execute()
-            {
-                await Sources.Scheduled.Update();
-                Database.Capture();
-            }
+            // Save data to db every 30 seconds
+            Schedule(() => Database.Capture()).ToRunEvery(30).Seconds();
         }
     }
 }
