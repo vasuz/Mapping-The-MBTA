@@ -19,8 +19,9 @@ namespace MappingTheMBTA
             // Run the data updater now & every 3 seconds
             Schedule(async () => await Sources.Actual.Update()).ToRunNow().AndEvery(3).Seconds();
 
-            // Run the database capture now & every minute
-            Schedule(() => Database.Capture()).ToRunNow().AndEvery(1).Minutes();
+            // Run the database capture now & every day at 3:59AM and 4:01AM
+            Schedule(() => Database.Capture()).ToRunNow().AndEvery(1).Days().At(3, 59);
+            Schedule(() => Database.Capture()).ToRunEvery(1).Days().At(4, 01);
 
             // Run the schedule updater every day at 4AM
             Schedule(async () => await Sources.Scheduled.Update()).ToRunEvery(1).Days().At(4, 00);

@@ -55,6 +55,8 @@ namespace MappingTheMBTA.Data
                                     curStop.Complete();
                                 else
                                     curStop.ContinueCompletion();
+
+                                Database.Capture();
                             }
                         }
                     }

@@ -19,6 +19,8 @@ namespace MappingTheMBTA.Models
     public class Trip
     {
         [Key]
+        public int Id { get; set; }
+
         public string TripID { get; set; }
         public string Line { get; set; }
 
