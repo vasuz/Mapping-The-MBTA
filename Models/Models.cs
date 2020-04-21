@@ -2,12 +2,14 @@ using MappingTheMBTA.Data;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace MappingTheMBTA.Models
 {
     public class Dataset
     {
+        [Key]
         public int EffectiveDate { get; set; } // in unix days
         public List<Trip> Trips { get; set; }
 
@@ -16,11 +18,11 @@ namespace MappingTheMBTA.Models
 
     public class Trip
     {
-        public List<Stop> Stops { get; set; }
-
+        [Key]
+        public string TripID { get; set; }
         public string Line { get; set; }
 
-        public string TripID { get; set; }
+        public List<Stop> Stops { get; set; }
 
         public long StartTime { get; set; } // in unix seconds
         public long EndTime { get; set; } // in unix seconds
@@ -31,17 +33,14 @@ namespace MappingTheMBTA.Models
 
     public class Stop
     {
-        public Station Station { get; set; }
+        [Key]
+        public int Id { get; set; }
+
+        public string PlaceID { get; set; } // front end format (i.e "place-<station code>")
 
         public long Arrival { get; set; } // time in unix, scheduled time then arrived time
         public long Departure { get; set; } // time in unix, scheduled time then arrived time
         public long? Delta { get; set; } // [arrived time - scheduled time] filled in after a train arrives
-    }
-
-    public class Station
-    {
-        public string GTFS { get; set; } // gtfs id
-        public string PlaceID { get; set; } // front end format (i.e "place-<station code>")
     }
 
     // at startup, fetches the list of routes & their termini from the mbta

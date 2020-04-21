@@ -24,7 +24,7 @@ namespace MappingTheMBTA
         {
             DateTime effective = time;
             if (effective.Hour < 4)
-                effective.AddDays(-1);
+                effective = effective.AddDays(-1);
             return ConvertToDays(effective);
         }
 

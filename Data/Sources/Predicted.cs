@@ -12,15 +12,18 @@ namespace MappingTheMBTA.Data
         private static List<Trip> _predictions = new List<Trip>();
 
         // includes the current predictions in the dataset to return
-        public static Dataset Include(Dataset today)
+        public static Dataset Include()
         {
-            Dataset result = today.Clone();
+            Dataset result = Sources.Today.Clone();
 
-            //
-            //
-            // insert predictions into result here
-            //
-            //
+            foreach(Trip trip in _predictions)
+            {
+                var single = result.Trips.SingleOrDefault(x => x.TripID == trip.TripID);
+                if(single != null)
+                {
+                    single.Stops = trip.Stops;
+                }
+            }
 
             return result;
         }
@@ -76,11 +79,7 @@ namespace MappingTheMBTA.Data
                 Stop predToAdd = new Stop()
                 {
                     Delta = null,
-                    Station = new Station()
-                    {
-                        GTFS = GTFS,
-                        PlaceID = Utils.ResolveGTFS(GTFS)
-                    }
+                    PlaceID = Utils.ResolveGTFS(GTFS)
                 };
 
                 if (prediction.attributes.arrival_time != null)

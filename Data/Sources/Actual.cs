@@ -43,9 +43,10 @@ namespace MappingTheMBTA.Data
                         if (curTrip != null)
                         {
                             string gtfs = vehicle.relationships.stop.data.id;
+                            string placeID = Utils.ResolveGTFS(gtfs);
                             // get this vehicle's stop (if it doesn't exist, ignore it)
                             // also make sure it has an arrival time (if not, ignore it)
-                            Stop curStop = curTrip.Stops.SingleOrDefault(x => x.Station.GTFS == gtfs);
+                            Stop curStop = curTrip.Stops.SingleOrDefault(x => x.PlaceID == placeID);
                             if (curStop != null && curStop.Arrival != 0)
                             {
                                 // complete it only if it has not already been completed (delta is null)

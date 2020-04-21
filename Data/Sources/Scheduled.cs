@@ -61,11 +61,7 @@ namespace MappingTheMBTA.Data
 
                     var stopToAdd = new Stop()
                     {
-                        Station = new Station()
-                        {
-                            GTFS = GTFS,
-                            PlaceID = Utils.ResolveGTFS(GTFS)
-                        },
+                        PlaceID = Utils.ResolveGTFS(GTFS),
                         Delta = null
                     };
 
