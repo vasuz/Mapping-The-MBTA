@@ -16,7 +16,7 @@ namespace MappingTheMBTA.Controllers
         {
             Console.WriteLine($"{DateTime.Now} | REQ | GET /api/data?date={date}");
             if (date == DateTime.Now.ConvertToEffective())
-                return Data.Predicted.Include();
+                return Sources.Today;
             else
                 return Database.Retrieve(date);
         }
