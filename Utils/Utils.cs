@@ -28,8 +28,8 @@ namespace MappingTheMBTA
             return ConvertToDays(effective);
         }
 
-        public static long ToUnixSeconds(this DateTime time) => (long)time.ToUniversalTime().Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-        public static int ToUnixDays(this DateTime time) => (int)time.ToUniversalTime().Subtract(new DateTime(1970, 1, 1)).TotalDays;
+        public static long ToUnixSeconds(this DateTime time) => (long)time.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+        public static int ToUnixDays(this DateTime time) => (int)time.Subtract(new DateTime(1970, 1, 1)).TotalDays;
 
         // Resolves the api's GTFS location to place-ID format
         public static string ResolveGTFS(string GTFS)
