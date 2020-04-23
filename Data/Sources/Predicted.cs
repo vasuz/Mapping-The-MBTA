@@ -16,10 +16,10 @@ namespace MappingTheMBTA.Data
         {
             Dataset result = Sources.Today.Clone();
 
-            foreach(Trip trip in _predictions)
+            foreach (Trip trip in _predictions)
             {
                 var single = result.Trips.SingleOrDefault(x => x.TripID == trip.TripID);
-                if(single != null)
+                if (single != null)
                 {
                     single.Stops = trip.Stops;
                 }
@@ -37,12 +37,12 @@ namespace MappingTheMBTA.Data
 
             // add each route to the queue
             foreach (var route in Route.Routes)
-                pending.Add(Tuple.Create(new MBTAWeb().FetchJSONAsync(MBTAWeb.Endpoint.predictions, $"?filter[route]={route.Key}"), route.Value));
+                pending.Add(Tuple.Create(new MBTAWeb().FetchJSONAsync(MBTAWeb.Endpoint.predictions, $"?filter[route]"), route.Value));
             // process the queue
             foreach (var item in pending)
                 result.AddRange(ProcessData(await item.Item1, item.Item2));
 
-            result.ConfigTimes();
+            result.EnforceTimes();
 
             _predictions = result;
         }

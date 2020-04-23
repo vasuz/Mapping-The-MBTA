@@ -19,17 +19,17 @@ namespace MappingTheMBTA
         // Converts the dynamic DateTime format into unix time
         public static int ConvertToDays(dynamic timestamp) => ((DateTime)timestamp).ToUnixDays();
 
-        // Converts a given DateTime to the effective data date (adjusted for 4AM cutoff)
+        // Converts a given DateTime to the effective data date (adjusted for 3AM cutoff)
         public static int ConvertToEffective(this DateTime time)
         {
             DateTime effective = time;
-            if (effective.Hour < 4)
+            if (effective.Hour < 3)
                 effective = effective.AddDays(-1);
             return ConvertToDays(effective);
         }
 
-        public static long ToUnixSeconds(this DateTime time) => (long)time.ToUniversalTime().Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-        public static int ToUnixDays(this DateTime time) => (int)time.ToUniversalTime().Subtract(new DateTime(1970, 1, 1)).TotalDays;
+        public static long ToUnixSeconds(this DateTime time) => (long)time.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+        public static int ToUnixDays(this DateTime time) => (int)time.Subtract(new DateTime(1970, 1, 1)).TotalDays;
 
         // Resolves the api's GTFS location to place-ID format
         public static string ResolveGTFS(string GTFS)
@@ -60,8 +60,10 @@ namespace MappingTheMBTA
                 stop.Departure = DateTime.Now.ToUnixSeconds();
         }
 
-        // enforces that each trip's start/end times are correct
-        public static void ConfigTimes(this List<Trip> trips)
+        // enforces that the following invariant:
+        // trip start time = minimum non-zero time in any contained stop
+        // trip end time = maximum non-zero time in any contained stop
+        public static void EnforceTimes(this List<Trip> trips)
         {
             foreach (Trip trip in trips)
             {

@@ -14,8 +14,8 @@ namespace MappingTheMBTA
             // Populate the current dataset, wait for it
             Sources.Populate().Wait();
 
-            // Run the schedule updater every day at 4AM
-            Schedule(async () => await Sources.Populate()).ToRunEvery(1).Days().At(4, 00);
+            // Run the schedule updater every day at 3AM Eastern Time
+            Schedule(async () => await Sources.Populate()).ToRunEvery(1).Days().At(3, 00);
 
             // Run the prediction updater now & every 30 seconds
             Schedule(async () => await Predicted.Update()).ToRunNow().AndEvery(30).Seconds();

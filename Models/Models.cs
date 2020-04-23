@@ -47,7 +47,7 @@ namespace MappingTheMBTA.Models
 
         public long Arrival { get; set; } // time in unix, scheduled time then arrived time
         public long Departure { get; set; } // time in unix, scheduled time then arrived time
-        public long? Delta { get; set; } // [arrived time - scheduled time] filled in after a train arrives
+        public long? Delta { get; set; } // filled in after a train arrives
     }
 
     // at startup, fetches the list of routes & their termini from the mbta

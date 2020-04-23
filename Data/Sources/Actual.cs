@@ -27,6 +27,9 @@ namespace MappingTheMBTA.Data
                 // process the queue
                 foreach (var item in pending)
                     ProcessData(await item);
+
+                // enforce trip timing invariants
+                Today.Trips.EnforceTimes();
             }
 
             private static void ProcessData(string jsonVehicles)
