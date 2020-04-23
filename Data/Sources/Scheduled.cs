@@ -20,10 +20,10 @@ namespace MappingTheMBTA.Data
                 };
 
                 List<Tuple<Task<string>, KeyValuePair<string, string[]>>> pending = new List<Tuple<Task<string>, KeyValuePair<string, string[]>>>();
+
                 // add each route to the queue
                 foreach (var route in Route.Routes)
                     pending.Add(Tuple.Create(new MBTAWeb().FetchJSONAsync(MBTAWeb.Endpoint.schedules, $"?filter[route]={route.Key},filter[date]={DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}"), route));
-                
                 // process the queue
                 foreach (Tuple<Task<string>, KeyValuePair<string, string[]>> item in pending)
                     result.Trips.AddRange(ProcessData(await item.Item1, item.Item2));
