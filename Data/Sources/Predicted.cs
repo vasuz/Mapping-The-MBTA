@@ -37,7 +37,7 @@ namespace MappingTheMBTA.Data
 
             // add each route to the queue
             foreach (var route in Route.Routes)
-                pending.Add(Tuple.Create(new MBTAWeb().FetchJSONAsync(MBTAWeb.Endpoint.predictions, $"?filter[route]"), route.Value));
+                pending.Add(Tuple.Create(new MBTAWeb().FetchJSONAsync(MBTAWeb.Endpoint.predictions, $"?filter[route]={route.Key}"), route.Value));
             // process the queue
             foreach (var item in pending)
                 result.AddRange(ProcessData(await item.Item1, item.Item2));
