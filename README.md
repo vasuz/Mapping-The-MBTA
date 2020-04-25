@@ -1,6 +1,6 @@
 # Mapping The MBTA
 
-This is the server component of the [Mapping the MBTA](https://github.com/Kirpal/mapping-the-mbta) project.
+This project is the server component of [Mapping the MBTA](https://github.com/Kirpal/mapping-the-mbta).
 
 ---
 
