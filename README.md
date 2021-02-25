@@ -18,4 +18,4 @@ Steps to run it on your own:
     2. `dotnet publish "MappingTheMBTA.csproj" -c Release -o /app/publish`
     3. `dotnet MappingTheMBTA.dll`
 
-You'll also need an API key to be able to receive data from the MBTA. You can get one from the MBTA's [developer portal](https://api-v3.mbta.com/).
+You'll also need an API key to be able to receive data from the MBTA. You can get one from the MBTA's [developer portal](https://api-v3.mbta.com/) - simply set it as the `MBTA_KEY` environment variable.
