@@ -1,8 +1,8 @@
 # Mapping The MBTA
 
-This project is the server component of [Mapping the MBTA](https://github.com/Kirpal/mapping-the-mbta).
+This project is the server component of the [Mapping the MBTA](https://github.com/Kirpal/mapping-the-mbta) visualization project.
 
-Created using the ASP.NET Core Web framework, this project provides all API endpoints used in the Mapping the MBTA project to generate live visualizations of the MBTA rapid transit network. The server requests and parses live data from the MBTA's APIs and provides it in a digestable format for the web visualization to receive and render for the user.
+Created using the ASP.NET Core Web framework, this project provides all API endpoints used in Mapping the MBTA to generate live visualizations of the MBTA rapid transit network. The server requests and parses live data from the MBTA's APIs and provides it in a digestable format for the web visualization to receive and render for the user.
 
 ---
 
